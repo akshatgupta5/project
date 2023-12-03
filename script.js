@@ -162,7 +162,6 @@ function editUser(userId) {
         </td>
     `;
 }
-
 function saveEdit(userId) {
     const updatedUser = {
         id: userId,
@@ -171,12 +170,34 @@ function saveEdit(userId) {
         role: document.getElementById(`edit-role-${userId}`).value
     };
 
+    // Update users and filteredUsers arrays
     users = users.map(user => user.id === userId ? updatedUser : user);
     if (isFiltered) {
         filteredUsers = filteredUsers.map(user => user.id === userId ? updatedUser : user);
     }
-    displayUsers(currentPage, isFiltered ? filteredUsers : users);
-    filterUsers();
+
+    // Display the current page after updating the user
+    // displayUsers(currentPage, isFiltered ? filteredUsers : users);
+    const row = document.getElementById(`row-${userId}`);
+    row.innerHTML = `
+    <td><input type="checkbox" class="select-row"></td>
+    <td>${updatedUser.id}</td>
+    <td id="name-${updatedUser.id}">${updatedUser.name}</td>
+    <td id="email-${updatedUser.id}">${updatedUser.email}</td>
+    <td id="role-${updatedUser.id}">${updatedUser.role}</td>
+    <td>
+        <button onclick="editUser('${updatedUser.id}')">Edit</button>
+        <button onclick="deleteUser('${updatedUser.id}')">Delete</button>
+    </td>
+`;
+    // If filtering is active, reapply the filter but stay on the current page
+    if (isFiltered) {
+        filterUsers();
+        const totalItems = filteredUsers.length;
+        const totalPages = Math.ceil(totalItems / rowsPerPage);
+        currentPage = Math.min(currentPage, totalPages); // Adjust if the current page exceeds the total pages
+        displayUsers(currentPage, filteredUsers);
+    }
 }
 
 function cancelEdit(userId) {
