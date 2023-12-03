@@ -1,0 +1,16 @@
+#users-table th {
+    background-color: #eee;
+    /* Other styling */
+}
+
+#users-table td {
+    /* Styling */
+}
+
+#pagination button {
+    /* Styling */
+}
+.highlight-row {
+    background-color: #d0d0d0;
+}
+/* Add more CSS for styling the rest of your elements */

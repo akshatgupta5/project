@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="admin-dashboard">
+        <input type="text" id="search-box" placeholder="Search..." onkeyup="handleSearchKeyUp(event)">
+        <table id="users-table">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="select-all" onclick="toggleSelectAll(this)"></th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <!-- Users will be populated here -->
+            </tbody>
+        </table>
+        <div id="pagination">
+            <!-- Pagination will be populated here -->
+            <button class="first-page" onclick="changedirectPage(-1)"><</button>
+            <button class="previous-page" onclick="changePage(-1)"><<</button>
+    <span id="currentPageDisplay"></span>
+    <button class="next-page" onclick="changePage(1)">>></button>
+    <button class="page"onclick="changedirectPage(1)">></button>
+        </div>
+        <button id="delete-selected" onclick="deleteSelected()">Delete Selected</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
